@@ -47,12 +47,12 @@ const Product = () => {
 
   return (
     <div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around", gap: "16px" }}>
         {data.map((item) => (
           <Card
             key={item.id}
             sx={{
-              maxWidth: 345,
+              maxWidth: 300,
               flex: "1 1 30%",
               borderRadius: "16px",
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
