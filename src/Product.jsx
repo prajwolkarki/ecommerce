@@ -45,7 +45,7 @@ const Product = () => {
     setSelectedProduct(null)
   }
 
-  if (loading) return <ProductSkeleton count={6} rows={2} />
+  if (loading) return <ProductSkeleton count={8} rows={2} />
   if (error) return <div>Error: {error}</div>
 
   return (
