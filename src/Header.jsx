@@ -34,13 +34,6 @@ const Header = () => {
       >
         Prajwol's Shop
       </h1>
-      <nav>
-        <ul style={{ display: "flex", listStyleType: "none", gap: "20px" }}>
-          <li style={{ cursor: "pointer" }}>Home</li>
-          <li style={{ cursor: "pointer" }}>About</li>
-          <li style={{ cursor: "pointer" }}>Products</li>
-        </ul>
-      </nav>
       <div style={{ display: "flex" }}>
         <FacebookIcon sx={{ cursor: "pointer" }} />
         <LinkedInIcon sx={{ marginLeft: "10px", cursor: "pointer" }} />
