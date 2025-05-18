@@ -1,49 +1,52 @@
-import React, { useEffect, useState } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { Box, Snackbar, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
-import { useCartStore, useStore } from "./store";
+"use client"
+
+import { useEffect, useState } from "react"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import CardMedia from "@mui/material/CardMedia"
+import Typography from "@mui/material/Typography"
+import Button from "@mui/material/Button"
+import { Box, Snackbar, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material"
+import { useCartStore, useStore } from "./store"
+import ProductSkeleton from "./product-skeleton"
 
 const Product = () => {
-  const { data, loading, error, fetchData } = useStore();
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const { data, loading, error, fetchData } = useStore()
+  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState(null)
 
-  const { cart, addToCart } = useCartStore();
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { cart, addToCart } = useCartStore()
 
   useEffect(() => {
-    console.log("Cart items:", cart);
-  }, [cart]);
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    console.log("Cart items:", cart)
+  }, [cart])
 
   const handleAddToCart = (product) => {
-    addToCart(product);
-    setOpenSnackbar(true);
-  };
+    addToCart(product)
+    setOpenSnackbar(true)
+  }
 
   const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+    setOpenSnackbar(false)
+  }
 
   const handleCardClick = (product) => {
-    setSelectedProduct(product);
-    setOpenDialog(true);
-  };
+    setSelectedProduct(product)
+    setOpenDialog(true)
+  }
 
   const handleCloseDialog = () => {
-    setOpenDialog(false);
-    setSelectedProduct(null);
-  };
+    setOpenDialog(false)
+    setSelectedProduct(null)
+  }
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <ProductSkeleton count={6} rows={2} />
+  if (error) return <div>Error: {error}</div>
 
   return (
     <div>
@@ -59,15 +62,9 @@ const Product = () => {
               height: "auto",
               cursor: "pointer",
             }}
-            onClick={() => handleCardClick(item)} 
+            onClick={() => handleCardClick(item)}
           >
-            <CardMedia
-              component="img"
-              height="200"
-              image={item.image}
-              alt={item.title}
-              sx={{ objectFit: "contain" }}
-            />
+            <CardMedia component="img" height="200" image={item.image} alt={item.title} sx={{ objectFit: "contain" }} />
             <CardContent sx={{ padding: "16px" }}>
               <Typography
                 variant="h6"
@@ -132,8 +129,8 @@ const Product = () => {
                     padding: "8px 16px",
                   }}
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent opening the dialog when clicking "Add to Cart"
-                    handleAddToCart(item);
+                    e.stopPropagation() // Prevent opening the dialog when clicking "Add to Cart"
+                    handleAddToCart(item)
                   }}
                 >
                   Add To Cart
@@ -164,7 +161,7 @@ const Product = () => {
             <DialogTitle>{selectedProduct.title}</DialogTitle>
             <DialogContent>
               <img
-                src={selectedProduct.image}
+                src={selectedProduct.image || "/placeholder.svg"}
                 alt={selectedProduct.title}
                 style={{
                   width: "100%",
@@ -200,7 +197,7 @@ const Product = () => {
         )}
       </Dialog>
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product
