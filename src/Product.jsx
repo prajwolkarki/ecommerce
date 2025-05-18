@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import { Box, Snackbar, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material"
 import { useCartStore, useStore } from "./store"
-import ProductSkeleton from "./product-skeleton"
+import ProductSkeleton from "./ProductSkeleton"
 
 const Product = () => {
   const { data, loading, error, fetchData } = useStore()
